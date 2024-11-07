@@ -1,4 +1,4 @@
-package net.pippah.data
+package net.pippah.usermanager.data
 
 data class EmailAddress(val email: String) {
     private val parts = email.split('@')
