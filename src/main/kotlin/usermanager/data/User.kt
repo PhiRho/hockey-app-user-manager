@@ -17,7 +17,7 @@ data class User(
     val channel: Channel = Channel.ANY,
     val position: Position = Position.ANY_FIELD,
     val adminOptIn: Boolean = false,
-    val clubs: List<Club.ClubId>
+    val clubs: List<Club.ClubId> = emptyList()
 ) {
     enum class Gender(val gender: String) {
         MALE("male"),

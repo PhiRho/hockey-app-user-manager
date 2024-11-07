@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4476d798-c234-455e-8cfc-acef1b500ff5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/Club.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/PhoneNumber.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/League.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/Team.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/data/EmailAddress.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/EmailAddress.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/data/PhoneNumber.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/data/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/usermanager/data/User.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +50,7 @@
     "git-widget-placeholder": "mainline",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Kotlin"
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
   <component name="RecentsManager">
