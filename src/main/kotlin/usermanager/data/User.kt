@@ -12,12 +12,12 @@ data class User(
     /* Gender may be required for the purposes of entry into a league*/
     val gender: Gender?,
     val photoLocation: String?,
-    val skillLevel: Skill = Skill.NEVER_PLAYED,
-    val umpireLevel: Umpire = Umpire.NEVER_UMPED,
-    val channel: Channel = Channel.ANY,
-    val position: Position = Position.ANY_FIELD,
-    val adminOptIn: Boolean = false,
-    val clubs: List<Club.ClubId> = emptyList()
+    val skillLevel: Skill? = Skill.NEVER_PLAYED,
+    val umpireLevel: Umpire? = Umpire.NEVER_UMPED,
+    val channel: Channel? = Channel.ANY,
+    val position: Position? = Position.ANY_FIELD,
+    val adminOptIn: Boolean? = false,
+    val clubs: List<Club.ClubId>? = emptyList()
 ) {
     enum class Gender(val gender: String) {
         MALE("male"),
