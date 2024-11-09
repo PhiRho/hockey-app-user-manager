@@ -34,5 +34,7 @@ class UserManagementTest {
         val phone = "0781234567"
         val email = "test@example.com"
         val age = 30
+
+        manager.registerUser(name, phone, email, age)
     }
 }

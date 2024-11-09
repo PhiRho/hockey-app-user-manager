@@ -15,10 +15,18 @@ import net.pippah.usermanager.stores.UserDataStore
 import java.util.logging.Level
 import java.util.logging.Logger
 
-class UserManagement(val store: UserDataStore) {
+class UserManagement(private val store: UserDataStore) {
     /**
      * Creates a user in the management system
      */
+    fun registerUser(name: String,
+                     phone: String,
+                     email: String,
+                     age: Int
+    ) {
+        registerUser(name, phone, email, age, null, null, null, null, null)
+    }
+
     fun registerUser(name: String,
                      phone: String,
                      email: String,
@@ -36,16 +44,12 @@ class UserManagement(val store: UserDataStore) {
             email = emailAddress,
             phone = phoneNumber,
             age = age,
-            gender = gender,
-            skillLevel = skill,
-            umpireLevel = umpire,
-            channel = channel,
-            position = position,
-            id = null,
-            photoLocation = null,
-            adminOptIn = false,
-            clubs = null
         )
+        gender?.let { user.gender = gender }
+        skill?.let { user.skillLevel = skill }
+        umpire?.let { user.umpireLevel = umpire}
+        channel?.let { user.channel = channel }
+        position?.let { user.position = position }
 
         try {
             store.saveUser(user)

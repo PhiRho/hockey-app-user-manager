@@ -1,24 +1,27 @@
 package net.pippah.usermanager.data
 
 import java.util.UUID
+import java.util.logging.Level
+import java.util.logging.Logger
 
 data class User(
-    val id: UserId? = genNewUserId(),
     val name: String,
     val email: EmailAddress,
     val phone: PhoneNumber,
     /* There are age limits (above and below) for many teams*/
     val age: Int,
-    /* Gender may be required for the purposes of entry into a league*/
-    val gender: Gender?,
-    val photoLocation: String?,
-    val skillLevel: Skill? = Skill.NEVER_PLAYED,
-    val umpireLevel: Umpire? = Umpire.NEVER_UMPED,
-    val channel: Channel? = Channel.ANY,
-    val position: Position? = Position.ANY_FIELD,
-    val adminOptIn: Boolean? = false,
-    val clubs: List<Club.ClubId>? = emptyList()
 ) {
+    var id: UserId = genNewUserId()
+    /* Gender may be required for the purposes of entry into a league*/
+    var gender: Gender = Gender.OTHER
+    var photoLocation: String? = null
+    var skillLevel: Skill = Skill.NEVER_PLAYED
+    var umpireLevel: Umpire = Umpire.NEVER_UMPED
+    var channel: Channel = Channel.ANY
+    var position: Position = Position.ANY_FIELD
+    var adminOptIn: Boolean = false
+    var clubs: List<Club.ClubId> = emptyList()
+
     enum class Gender(val gender: String) {
         MALE("male"),
         FEMALE("female"),
@@ -59,6 +62,22 @@ data class User(
     }
 
     data class UserId(val id: String)
+
+    private fun getFieldNames(): List<String> {
+        return this.javaClass.declaredFields.map { field -> field.name }
+    }
+
+    fun getUserMap(): HashMap<String, Any> {
+        val map = HashMap<String, Any>()
+        val fields = this.getFieldNames()
+        log.log(Level.INFO, "Fields are $fields")
+        fields.forEach { field -> map[field] = this.javaClass.getDeclaredField(field) }
+        return map
+    }
+
+    companion object {
+        private val log = Logger.getLogger("User")
+    }
 }
 
 /**
