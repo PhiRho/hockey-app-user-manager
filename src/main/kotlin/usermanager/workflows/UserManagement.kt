@@ -23,8 +23,8 @@ class UserManagement(private val store: UserDataStore) {
                      phone: String,
                      email: String,
                      age: Int
-    ) {
-        registerUser(name, phone, email, age, null, null, null, null, null)
+    ): UserId {
+        return registerUser(name, phone, email, age, null, null, null, null, null)
     }
 
     fun registerUser(name: String,
@@ -36,7 +36,7 @@ class UserManagement(private val store: UserDataStore) {
                      umpire: Umpire?,
                      channel: Channel?,
                      position: Position?
-    ) {
+    ): UserId {
         val emailAddress = EmailAddress(email)
         val phoneNumber = PhoneNumber(countryCode = "+27", number = phone)
         val user = User(
@@ -56,6 +56,7 @@ class UserManagement(private val store: UserDataStore) {
         } catch (e: Exception) {
             log.log(Level.SEVERE, "Unable to save user", e)
         }
+        return user.id
     }
 
     fun deleteUser(user: UserId) {
@@ -71,7 +72,7 @@ class UserManagement(private val store: UserDataStore) {
     }
 
     fun getUserById(userId: UserId): User {
-        TODO("Return the full details of the user")
+        return store.getUserById(userId)
     }
 
     fun getUserByEmail(email: EmailAddress): User {

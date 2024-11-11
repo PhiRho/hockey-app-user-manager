@@ -8,6 +8,8 @@ import net.pippah.usermanager.data.User.Umpire
 import net.pippah.usermanager.workflows.UserManagement
 import usermanager.stores.MemoryUserDataStore
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 class UserManagementTest {
 
@@ -25,7 +27,14 @@ class UserManagementTest {
         val channel = Channel.LEFT
         val position = Position.FORWARD
 
-        manager.registerUser(name, phone, email, age, gender, skill, umpire, channel, position)
+        val id = manager.registerUser(name, phone, email, age, gender, skill, umpire, channel, position)
+        assertNotNull(id)
+        val user = manager.getUserById(id)
+        assertNotNull(user)
+        assertEquals(name, user.name)
+        assertEquals(age, user.age)
+        assertEquals(skill, user.skillLevel)
+        assertEquals(channel, user.channel)
     }
 
     @Test
@@ -35,6 +44,13 @@ class UserManagementTest {
         val email = "test@example.com"
         val age = 30
 
-        manager.registerUser(name, phone, email, age)
+        val id = manager.registerUser(name, phone, email, age)
+        assertNotNull(id)
+        val user = manager.getUserById(id)
+        assertNotNull(user)
+        assertEquals(name, user.name)
+        assertEquals(age, user.age)
+        assertEquals(Skill.NEVER_PLAYED, user.skillLevel)
+        assertEquals(Channel.ANY, user.channel)
     }
 }
