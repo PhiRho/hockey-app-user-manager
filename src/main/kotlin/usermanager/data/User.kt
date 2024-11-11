@@ -1,9 +1,11 @@
 package net.pippah.usermanager.data
 
+import kotlinx.serialization.Serializable
 import java.util.UUID
-import java.util.logging.Level
 import java.util.logging.Logger
 
+
+@Serializable
 data class User(
     val name: String,
     val email: EmailAddress,
@@ -61,19 +63,8 @@ data class User(
         ANY_FIELD("outfield")
     }
 
+    @Serializable
     data class UserId(val id: String)
-
-    private fun getFieldNames(): List<String> {
-        return this.javaClass.declaredFields.map { field -> field.name }
-    }
-
-    fun getUserMap(): HashMap<String, Any> {
-        val map = HashMap<String, Any>()
-        val fields = this.getFieldNames()
-        log.log(Level.INFO, "Fields are $fields")
-        fields.forEach { field -> map[field] = this.javaClass.getDeclaredField(field) }
-        return map
-    }
 
     companion object {
         private val log = Logger.getLogger("User")

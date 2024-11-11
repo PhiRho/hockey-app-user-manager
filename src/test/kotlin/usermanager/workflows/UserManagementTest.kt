@@ -22,8 +22,8 @@ class UserManagementTest {
         val gender = Gender.FEMALE
         val skill = Skill.EXPERIENCED
         val umpire = Umpire.WRITTEN_TEST
-        val channel = Channel.ANY
-        val position = Position.ANY_FIELD
+        val channel = Channel.LEFT
+        val position = Position.FORWARD
 
         manager.registerUser(name, phone, email, age, gender, skill, umpire, channel, position)
     }
