@@ -12,6 +12,7 @@ data class User(
     val phone: PhoneNumber,
     /* There are age limits (above and below) for many teams*/
     val age: Int,
+    // TODO val password: ???,
 ) {
     var id: UserId = genNewUserId()
     /* Gender may be required for the purposes of entry into a league*/

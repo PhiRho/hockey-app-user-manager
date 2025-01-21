@@ -76,11 +76,11 @@ class UserManagement(private val store: UserDataStore) {
     }
 
     fun getUserByEmail(email: EmailAddress): User {
-        TODO("Search for the user by their email address")
+        return store.searchUserByEmail(email)
     }
 
     fun getUserByPhoneNumber(phone: PhoneNumber): User {
-        TODO("Search for the user by their phone number")
+        return store.searchUserByPhone(phone)
     }
 
     //===============

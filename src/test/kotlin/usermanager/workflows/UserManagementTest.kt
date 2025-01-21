@@ -1,11 +1,16 @@
 package usermanager.workflows
 
+import net.pippah.usermanager.data.EmailAddress
+import net.pippah.usermanager.data.PhoneNumber
 import net.pippah.usermanager.data.User.Channel
 import net.pippah.usermanager.data.User.Gender
 import net.pippah.usermanager.data.User.Position
 import net.pippah.usermanager.data.User.Skill
 import net.pippah.usermanager.data.User.Umpire
+import net.pippah.usermanager.data.User.UserId
+import net.pippah.usermanager.exceptions.InvalidIdException
 import net.pippah.usermanager.workflows.UserManagement
+import org.junit.jupiter.api.assertThrows
 import usermanager.stores.MemoryUserDataStore
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,6 +38,7 @@ class UserManagementTest {
         assertNotNull(user)
         assertEquals(name, user.name)
         assertEquals(age, user.age)
+        // Verifies that the non-default fields are saved
         assertEquals(skill, user.skillLevel)
         assertEquals(channel, user.channel)
     }
@@ -50,7 +56,45 @@ class UserManagementTest {
         assertNotNull(user)
         assertEquals(name, user.name)
         assertEquals(age, user.age)
+        // Verifies that default values are correctly applied
         assertEquals(Skill.NEVER_PLAYED, user.skillLevel)
         assertEquals(Channel.ANY, user.channel)
+    }
+
+    @Test
+    fun `throws if the user does not exist`() {
+        assertThrows<InvalidIdException> { manager.getUserById(UserId("faker")) }
+    }
+
+    @Test
+    fun `retrieves a user by email address`() {
+        val name = "Pippa Hillebrand"
+        val phone = "0781234567"
+        val email = "test@example.com"
+        val age = 30
+
+        val id = manager.registerUser(name, phone, email, age)
+        assertNotNull(id)
+        val user = manager.getUserByEmail(EmailAddress(email))
+        assertNotNull(user)
+        assertEquals(id, user.id)
+        assertEquals(name, user.name)
+        assertEquals(age, user.age)
+    }
+
+    @Test
+    fun `retrieves a user by phone number`() {
+        val name = "Pippa Hillebrand"
+        val phone = "0781234567"
+        val email = "test@example.com"
+        val age = 30
+
+        val id = manager.registerUser(name, phone, email, age)
+        assertNotNull(id)
+        val user = manager.getUserByPhoneNumber(PhoneNumber("+27", phone))
+        assertNotNull(user)
+        assertEquals(id, user.id)
+        assertEquals(name, user.name)
+        assertEquals(age, user.age)
     }
 }
