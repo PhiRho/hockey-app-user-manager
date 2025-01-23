@@ -14,3 +14,7 @@ something a little bit more. I want to make things easier for the administrative
 side of a field hockey club, leaving more time for players to play, and less
 time filling in forms or trying to figure out how to order kit.
 
+## See also
+As a large part of this project is aboutkeeping my skills up, I have a sibling
+project for at home exercises which is being written in python. That project can
+be found at [HockeyExercises](https://github.com/PhiRho/HockeyExercises).
