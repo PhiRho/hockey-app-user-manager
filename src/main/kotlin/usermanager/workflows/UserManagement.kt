@@ -22,15 +22,15 @@ class UserManagement(private val store: UserDataStore) {
     fun registerUser(name: String,
                      phone: String,
                      email: String,
-                     age: Int
+                     dob: String
     ): UserId {
-        return registerUser(name, phone, email, age, null, null, null, null, null)
+        return registerUser(name, phone, email, dob, null, null, null, null, null)
     }
 
     fun registerUser(name: String,
                      phone: String,
                      email: String,
-                     age: Int,
+                     dob: String,
                      gender: Gender?,
                      skill: Skill?,
                      umpire: Umpire?,
@@ -43,7 +43,7 @@ class UserManagement(private val store: UserDataStore) {
             name = name,
             email = emailAddress,
             phone = phoneNumber,
-            age = age,
+            dob = dob,
         )
         gender?.let { user.gender = gender }
         skill?.let { user.skillLevel = skill }

@@ -1,7 +1,11 @@
 package usermanager.stores
 
-import com.amazonaws.services.dynamodbv2.document.Attribute
-import com.amazonaws.services.dynamodbv2.model.AttributeDefinition
+import aws.sdk.kotlin.services.dynamodb.DynamoDbClient
+import aws.sdk.kotlin.services.dynamodb.model.AttributeDefinition
+import aws.sdk.kotlin.services.dynamodb.model.CreateTableRequest
+import aws.sdk.kotlin.services.dynamodb.model.KeySchemaElement
+import aws.sdk.kotlin.services.dynamodb.model.KeyType
+import aws.sdk.kotlin.services.dynamodb.model.ScalarAttributeType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.pippah.usermanager.data.EmailAddress
@@ -10,26 +14,47 @@ import net.pippah.usermanager.data.User
 import net.pippah.usermanager.data.User.UserId
 import net.pippah.usermanager.exceptions.InvalidIdException
 import net.pippah.usermanager.stores.UserDataStore
-import software.amazon.awssdk.regions.Region
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient
-import software.amazon.awssdk.services.dynamodb.model.TableClass.STANDARD
 import java.util.logging.Level
 import java.util.logging.Logger
 
 class MemoryUserDataStore: UserDataStore {
 
-    val ddb = DynamoDbClient.builder()
-        .region(Region.US_WEST_2)
+    private val ddb = DynamoDbClient.builder()
         .build()
 
     fun setupTables() {
-        val attributes = ArrayList<AttributeDefinition>()
-        
-        ddb.createTable { req ->
-            req.tableName("users")
-            req.tableClass(STANDARD)
-            req.attributeDefinitions(attributes)
+        val attributes = listOf(
+            AttributeDefinition{
+                attributeName = "id"
+                attributeType = ScalarAttributeType.S
+            },
+            AttributeDefinition{
+                attributeName = "name"
+                attributeType = ScalarAttributeType.S
+            },
+            AttributeDefinition{
+                attributeName = "email"
+                attributeType = ScalarAttributeType.S
+            },
+            AttributeDefinition{
+                attributeName = "phone"
+                attributeType = ScalarAttributeType.S
+            },
+            AttributeDefinition{
+                attributeName = "dob"
+                attributeType = ScalarAttributeType.S
+            },
+        )
+
+        val req = CreateTableRequest {
+            attributeDefinitions = attributes
+            keySchema = listOf(KeySchemaElement{
+                attributeName = "id"
+                keyType = KeyType.Hash
+            })
+            tableName = "users"
         }
+
     }
 
     override fun saveUser(user: User) {

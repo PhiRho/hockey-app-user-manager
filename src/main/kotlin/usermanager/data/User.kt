@@ -11,7 +11,7 @@ data class User(
     val email: EmailAddress,
     val phone: PhoneNumber,
     /* There are age limits (above and below) for many teams*/
-    val age: Int,
+    val dob: String,
     // TODO val password: ???,
 ) {
     var id: UserId = genNewUserId()

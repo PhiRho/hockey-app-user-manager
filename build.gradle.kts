@@ -12,10 +12,9 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
-    implementation(platform("software.amazon.awssdk:bom:2.30.2"))
-    implementation("software.amazon.awssdk:dynamodb")
+    implementation("aws.sdk.kotlin:dynamodb:1.4.7")
     testImplementation(kotlin("test"))
-    testImplementation("com.amazonaws:DynamoDBLocal:2.5.3")
+    testImplementation("com.amazonaws:DynamoDBLocal:2.5.4")
 }
 
 tasks.test {

@@ -25,19 +25,19 @@ class UserManagementTest {
         val name = "Pippa Hillebrand"
         val phone = "0781234567"
         val email = "test@example.com"
-        val age = 30
+        val dob = "13/10/1993"
         val gender = Gender.FEMALE
         val skill = Skill.EXPERIENCED
         val umpire = Umpire.WRITTEN_TEST
         val channel = Channel.LEFT
         val position = Position.FORWARD
 
-        val id = manager.registerUser(name, phone, email, age, gender, skill, umpire, channel, position)
+        val id = manager.registerUser(name, phone, email, dob, gender, skill, umpire, channel, position)
         assertNotNull(id)
         val user = manager.getUserById(id)
         assertNotNull(user)
         assertEquals(name, user.name)
-        assertEquals(age, user.age)
+        assertEquals(dob, user.dob)
         // Verifies that the non-default fields are saved
         assertEquals(skill, user.skillLevel)
         assertEquals(channel, user.channel)
@@ -48,14 +48,14 @@ class UserManagementTest {
         val name = "Pippa Hillebrand"
         val phone = "0781234567"
         val email = "test@example.com"
-        val age = 30
+        val dob = "13/10/1993"
 
-        val id = manager.registerUser(name, phone, email, age)
+        val id = manager.registerUser(name, phone, email, dob)
         assertNotNull(id)
         val user = manager.getUserById(id)
         assertNotNull(user)
         assertEquals(name, user.name)
-        assertEquals(age, user.age)
+        assertEquals(dob, user.dob)
         // Verifies that default values are correctly applied
         assertEquals(Skill.NEVER_PLAYED, user.skillLevel)
         assertEquals(Channel.ANY, user.channel)
@@ -71,15 +71,15 @@ class UserManagementTest {
         val name = "Pippa Hillebrand"
         val phone = "0781234567"
         val email = "test@example.com"
-        val age = 30
+        val dob = "13/10/1993"
 
-        val id = manager.registerUser(name, phone, email, age)
+        val id = manager.registerUser(name, phone, email, dob)
         assertNotNull(id)
         val user = manager.getUserByEmail(EmailAddress(email))
         assertNotNull(user)
         assertEquals(id, user.id)
         assertEquals(name, user.name)
-        assertEquals(age, user.age)
+        assertEquals(dob, user.dob)
     }
 
     @Test
@@ -87,14 +87,14 @@ class UserManagementTest {
         val name = "Pippa Hillebrand"
         val phone = "0781234567"
         val email = "test@example.com"
-        val age = 30
+        val dob = "13/10/1993"
 
-        val id = manager.registerUser(name, phone, email, age)
+        val id = manager.registerUser(name, phone, email, dob)
         assertNotNull(id)
         val user = manager.getUserByPhoneNumber(PhoneNumber("+27", phone))
         assertNotNull(user)
         assertEquals(id, user.id)
         assertEquals(name, user.name)
-        assertEquals(age, user.age)
+        assertEquals(dob, user.dob)
     }
 }
