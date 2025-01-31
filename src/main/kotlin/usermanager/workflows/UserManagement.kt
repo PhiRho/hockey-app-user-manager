@@ -12,17 +12,25 @@ import net.pippah.usermanager.data.User.Skill
 import net.pippah.usermanager.data.User.Umpire
 import net.pippah.usermanager.data.User.UserId
 import net.pippah.usermanager.stores.UserDataStore
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import java.util.logging.Level
 import java.util.logging.Logger
 
+@RestController
+@RequestMapping("/user/")
 class UserManagement(private val store: UserDataStore) {
     /**
      * Creates a user in the management system
      */
-    fun registerUser(name: String,
-                     phone: String,
-                     email: String,
-                     dob: String
+    @PostMapping
+    fun registerUser(@RequestParam("name") name: String,
+                     @RequestParam("phone") phone: String,
+                     @RequestParam("email") email: String,
+                     @RequestParam("dob") dob: String
     ): UserId {
         return registerUser(name, phone, email, dob, null, null, null, null, null)
     }
@@ -71,15 +79,18 @@ class UserManagement(private val store: UserDataStore) {
         TODO()
     }
 
-    fun getUserById(userId: UserId): User {
+    @GetMapping
+    fun getUserById(@RequestParam("user-id") userId: UserId): User {
         return store.getUserById(userId)
     }
 
-    fun getUserByEmail(email: EmailAddress): User {
+    @GetMapping
+    fun getUserByEmail(@RequestParam("email") email: EmailAddress): User {
         return store.searchUserByEmail(email)
     }
 
-    fun getUserByPhoneNumber(phone: PhoneNumber): User {
+    @GetMapping
+    fun getUserByPhoneNumber(@RequestParam("phone") phone: PhoneNumber): User {
         return store.searchUserByPhone(phone)
     }
 

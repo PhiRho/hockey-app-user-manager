@@ -1,11 +1,6 @@
 package usermanager.stores
 
 import aws.sdk.kotlin.services.dynamodb.DynamoDbClient
-import aws.sdk.kotlin.services.dynamodb.model.AttributeDefinition
-import aws.sdk.kotlin.services.dynamodb.model.CreateTableRequest
-import aws.sdk.kotlin.services.dynamodb.model.KeySchemaElement
-import aws.sdk.kotlin.services.dynamodb.model.KeyType
-import aws.sdk.kotlin.services.dynamodb.model.ScalarAttributeType
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.pippah.usermanager.data.EmailAddress
@@ -22,40 +17,7 @@ class MemoryUserDataStore: UserDataStore {
     private val ddb = DynamoDbClient.builder()
         .build()
 
-    fun setupTables() {
-        val attributes = listOf(
-            AttributeDefinition{
-                attributeName = "id"
-                attributeType = ScalarAttributeType.S
-            },
-            AttributeDefinition{
-                attributeName = "name"
-                attributeType = ScalarAttributeType.S
-            },
-            AttributeDefinition{
-                attributeName = "email"
-                attributeType = ScalarAttributeType.S
-            },
-            AttributeDefinition{
-                attributeName = "phone"
-                attributeType = ScalarAttributeType.S
-            },
-            AttributeDefinition{
-                attributeName = "dob"
-                attributeType = ScalarAttributeType.S
-            },
-        )
 
-        val req = CreateTableRequest {
-            attributeDefinitions = attributes
-            keySchema = listOf(KeySchemaElement{
-                attributeName = "id"
-                keyType = KeyType.Hash
-            })
-            tableName = "users"
-        }
-
-    }
 
     override fun saveUser(user: User) {
         log.log(Level.INFO, "Got a request to save user with ID ${user.id.id}")
